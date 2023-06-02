@@ -65,10 +65,7 @@ export function renderMenu1(arrayFromData) {
       const quantity = parseInt(inputField.value);
       if (quantity > 0) {
         menuItem.quantity = quantity;
-        // Code to add the selected item to the cart
         addingToCart(menuItem)
-        // You can implement this according to your requirements
-        // For example, you can store the item details and quantity in an array or send an AJAX request to the server
         alert("Added to cart: " + quantity + " item(s)");
       }
     });

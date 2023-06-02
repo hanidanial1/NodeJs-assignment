@@ -1,4 +1,9 @@
-import { buildDiv, createButton } from "./global-functions/globalFunctions.js";
+import {
+  buildDiv,
+  createButton,
+  decrementCounter,
+  incrementCounter,
+} from "./global-functions/globalFunctions.js";
 import { getAddedMeals, deletingAddedMeal } from "./menuController.js";
 
 const mainBody = document.querySelector("#mainBody");
@@ -52,7 +57,7 @@ export async function renderingAddedToCart(addedMeals) {
 
     const newBtn = createButton(
       "Delete This Order",
-      "btn  btn-danger text-center m-auto",
+      "btn  btn-danger text-center m-2 m-auto",
       async () => {
         const data = await deletingAddedMeal(meal._id);
         mainBody.innerHTML = " ";
@@ -62,11 +67,59 @@ export async function renderingAddedToCart(addedMeals) {
       ""
     );
 
-    const hr = document.createElement("hr");
+    const edit = createButton(
+      "Edit Order ",
+      "btn  btn-danger text-center mx-4",
+      async () => {
 
-    internalRow1.append(img, h4);
+        const inputField = document.createElement("input");
+        inputField.classList.add("form-control", "text-center");
+        inputField.setAttribute("type", "text");
+        inputField.value = meal.quantity
+        inputField.setAttribute("readonly", "true");
+
+
+        const incrementButton = document.createElement("button");
+        incrementButton.classList.add("btn", "btn-outline-secondary");
+        incrementButton.setAttribute("type", "button");
+        incrementButton.textContent = "+";
+        incrementButton.addEventListener("click", () => {
+          incrementCounter(inputField);
+        });
+
+        const addToCartButton = document.createElement("button");
+        addToCartButton.classList.add("btn", "btn-primary");
+        addToCartButton.textContent = "Add to Cart";
+        addToCartButton.addEventListener("click", async () => {
+          const quantity = parseInt(inputField.value);
+          if (quantity >= 0) {
+            const data = await deletingAddedMeal(meal._id);
+            renderingAddedToCart()
+          }
+        });
+
+        const decrementButton = document.createElement("button");
+        decrementButton.classList.add("btn", "btn-outline-secondary");
+        decrementButton.setAttribute("type", "button");
+        decrementButton.textContent = "-";
+        decrementButton.addEventListener("click", () => {
+          decrementCounter(inputField);
+        });
+
+        h4.after( inputField,decrementButton,  incrementButton);
+        edit.remove()
+      },
+      "",
+      ""
+    );
+
+    const hr = document.createElement("hr");
+    const hr1 = document.createElement("hr");
+
+
+    internalRow1.append(img, h4, hr1);
     col_4.appendChild(internalRow1);
-    col_8.append(p, newBtn);
+    col_8.append(p, newBtn, edit);
     bigRow.append(col_4, col_8);
     mainContainer1.append(h2, bigRow, hr);
     mainBody.append(mainContainer1);
