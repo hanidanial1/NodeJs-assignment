@@ -45,7 +45,6 @@ async function gettingAddedMeals(req, res) {
 // }
 
 async function updatingMonut(req, res) {
- console.log( req.body );
     const id = req.params.id
     try {
         await AddedMeal.findByIdAndUpdate(id, req.body)

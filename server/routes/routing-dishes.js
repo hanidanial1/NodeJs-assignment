@@ -20,7 +20,8 @@ router.post("/login",loginUser)
 router.post("/addedToCart", addMeal)
 router.get("/getAddedMeals", gettingAddedMeals)
 router.delete("/deleteAddedMeal/:id",deletingAddedMeal)
-router.put("/changeMeal" ,updatingMonut)
+router.put("/changeMeal/:id" ,updatingMonut)
+
 
 
 module.exports = router
