@@ -72,7 +72,6 @@ export async function deleting(params) {
 //     }
 // }
 
-// http://localhost:4000/getAddedMeals
 
 export async function addingToCart(addedMeal) {
 
@@ -112,6 +111,25 @@ export async function deletingAddedMeal(params) {
         "Content-Type": "application/json",
       },
     
+    })
+   const data = res.json()
+   return data
+  } catch (error) {
+    throw error;
+  }
+
+  
+}
+
+export async function updateMeal(params,objToUpdate) {
+
+  try {
+   const res = await fetch("http://127.0.0.1:4000/changeMeal/" + params, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    body: JSON.stringify(objToUpdate)
     })
    const data = res.json()
    return data

@@ -4,7 +4,7 @@ import {
   decrementCounter,
   incrementCounter,
 } from "./global-functions/globalFunctions.js";
-import { getAddedMeals, deletingAddedMeal } from "./menuController.js";
+import { getAddedMeals, deletingAddedMeal,updateMeal } from "./menuController.js";
 
 const mainBody = document.querySelector("#mainBody");
 
@@ -87,15 +87,15 @@ export async function renderingAddedToCart(addedMeals) {
 
         const submitEdit = document.createElement("button");
         submitEdit.textContent = "Submit Change";
+        submitEdit.classList = "btn  btn-danger text-center mx-4";
         submitEdit.addEventListener("click", async () => {
           const quantity = parseInt(inputField.value);
           if (quantity >= 1) {
             try {
               meal.quantity = inputField.value;
               h4.textContent = meal.quantity + " X quantity";
-
+              updateMeal(meal._id, meal)
               col_8.append(p, newBtn, edit);
-
               decrementButton.remove(decrementButton);
               incrementButton.remove(incrementButton);
               inputField.remove(inputField);
