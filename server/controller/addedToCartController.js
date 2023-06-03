@@ -44,13 +44,14 @@ async function gettingAddedMeals(req, res) {
 //     }
 // }
 
-// async function updating(req, res) {
-//     const id = req.params.id
-//     try {
-//         await AddedMeal.findByIdAndUpdate(id, req.body)
-//     } catch (error) { throw error }
-//     res.send('The dish was successfully updated.')
-// }
+async function updatingMonut(req, res) {
+ console.log( req.body );
+    const id = req.params.id
+    try {
+        await AddedMeal.findByIdAndUpdate(id, req.body)
+    } catch (error) { throw error }
+    res.send('The dish was successfully updated.')
+}
 
 async function deletingAddedMeal(req, res) {
     const { id } = req.params
@@ -66,4 +67,4 @@ async function deletingAddedMeal(req, res) {
    
 }
 
-module.exports = { addMeal, gettingAddedMeals,deletingAddedMeal };
+module.exports = { addMeal,updatingMonut, gettingAddedMeals,deletingAddedMeal };

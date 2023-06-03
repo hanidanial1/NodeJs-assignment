@@ -71,43 +71,51 @@ export async function renderingAddedToCart(addedMeals) {
       "Edit Order ",
       "btn  btn-danger text-center mx-4",
       async () => {
-
         const inputField = document.createElement("input");
         inputField.classList.add("form-control", "text-center");
         inputField.setAttribute("type", "text");
-        inputField.value = meal.quantity
+        inputField.value = meal.quantity;
         inputField.setAttribute("readonly", "true");
 
-
         const incrementButton = document.createElement("button");
-        incrementButton.classList.add("btn", "btn-outline-secondary");
+        incrementButton.classList = "btn btn-outline-secondary mb-2 mt-2";
         incrementButton.setAttribute("type", "button");
         incrementButton.textContent = "+";
         incrementButton.addEventListener("click", () => {
           incrementCounter(inputField);
         });
 
-        const addToCartButton = document.createElement("button");
-        addToCartButton.classList.add("btn", "btn-primary");
-        addToCartButton.textContent = "Add to Cart";
-        addToCartButton.addEventListener("click", async () => {
+        const submitEdit = document.createElement("button");
+        submitEdit.textContent = "Submit Change";
+        submitEdit.addEventListener("click", async () => {
           const quantity = parseInt(inputField.value);
-          if (quantity >= 0) {
-            const data = await deletingAddedMeal(meal._id);
-            renderingAddedToCart()
+          if (quantity >= 1) {
+            try {
+              meal.quantity = inputField.value;
+              h4.textContent = meal.quantity + " X quantity";
+
+              col_8.append(p, newBtn, edit);
+
+              decrementButton.remove(decrementButton);
+              incrementButton.remove(incrementButton);
+              inputField.remove(inputField);
+              submitEdit.remove(submitEdit);
+            } catch (error) {
+              throw console.log(error);
+            }
           }
         });
 
         const decrementButton = document.createElement("button");
-        decrementButton.classList.add("btn", "btn-outline-secondary");
+        decrementButton.classList = "btn btn-outline-secondary mb-2 mt-2 mx-2";
         decrementButton.setAttribute("type", "button");
         decrementButton.textContent = "-";
         decrementButton.addEventListener("click", () => {
           decrementCounter(inputField);
         });
 
-        h4.after( inputField,decrementButton,  incrementButton);
-        edit.remove()
+        h4.after(inputField, decrementButton, incrementButton, submitEdit);
+        edit.remove();
       },
       "",
       ""
@@ -115,7 +123,6 @@ export async function renderingAddedToCart(addedMeals) {
 
     const hr = document.createElement("hr");
     const hr1 = document.createElement("hr");
-
 
     internalRow1.append(img, h4, hr1);
     col_4.appendChild(internalRow1);

@@ -1,4 +1,4 @@
-const { addMeal , gettingAddedMeals,deletingAddedMeal } = require('../controller/addedToCartController.js')
+const { addMeal , gettingAddedMeals,deletingAddedMeal, updatingMonut } = require('../controller/addedToCartController.js')
 const { createClient, loginUser } = require('../controller/clientControllerNODEJS.js')
 const { gettingDishes, add, updating, deleting, getById } = require('../controller/control.dishes')
 const jwtAuth = require('../middlewares/jwtAuth.js')
@@ -20,6 +20,8 @@ router.post("/login",loginUser)
 router.post("/addedToCart", addMeal)
 router.get("/getAddedMeals", gettingAddedMeals)
 router.delete("/deleteAddedMeal/:id",deletingAddedMeal)
+router.put("/changeMeal" ,updatingMonut)
+
 
 module.exports = router
 
